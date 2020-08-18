@@ -22,6 +22,8 @@ public class Tests {
     driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
     driver.findElement(By.xpath("//button[@class='_1XiEJDPVpk']")).click();
     driver.findElement(By.xpath("//h3[./a[@title='Игровая приставка Nintendo Switch']]")).click();
+    //ТУТ ИДЕТ ПЕРЕХОД НА НОВУЮ ВКЛАДКУ И ТЕСТ ИЩЕТ ЭЛЕМЕНТЫ ЕЩЕ ПО СТАРОЙ СТРАНИЦЕ, КОГДА ФАКТИЧЕСКИ НАДО СМОТРЕТЬ ЭЛЕМЕНТЫ
+    //НА СТРАНИЦЕ С ПРИСТАВКОЙ ТУТ - https://market.yandex.ru/product--igrovaia-pristavka-nintendo-switch/1712127696?track=tabs&onstock=1
     new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
     driver.findElement(By.linkText("Характеристики")).click();
 
