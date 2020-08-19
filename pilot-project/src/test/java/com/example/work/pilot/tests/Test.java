@@ -1,13 +1,15 @@
-package com.example.work.pilot;
+package com.example.work.pilot.tests;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.example.work.pilot.classes.NintendoSpecification;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 
-public class Tests {
+public class Test {
   private WebDriver driver;
 
   @BeforeTest(alwaysRun = true)
@@ -16,29 +18,31 @@ public class Tests {
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
-  @Test
+  @org.testng.annotations.Test
   public void testS() throws Exception {
     driver.get("https://market.yandex.ru/");
     driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
     driver.findElement(By.xpath("//button[@class='_1XiEJDPVpk']")).click();
+    String oldTab = driver.getWindowHandle(); // сохраняем первую вкладку
     driver.findElement(By.xpath("//h3[./a[@title='Игровая приставка Nintendo Switch']]")).click();
-    //ТУТ ИДЕТ ПЕРЕХОД НА НОВУЮ ВКЛАДКУ И ТЕСТ ИЩЕТ ЭЛЕМЕНТЫ ЕЩЕ ПО СТАРОЙ СТРАНИЦЕ, КОГДА ФАКТИЧЕСКИ НАДО СМОТРЕТЬ ЭЛЕМЕНТЫ
-    //НА СТРАНИЦЕ С ПРИСТАВКОЙ ТУТ - https://market.yandex.ru/product--igrovaia-pristavka-nintendo-switch/1712127696?track=tabs&onstock=1
-    new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
+    ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles()); // список всех вкладок
+    driver.switchTo().window(newTab.get(1)); // берем вторую вкладку
+    //new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
     driver.findElement(By.linkText("Характеристики")).click();
+    Thread.sleep(2000);
+    String color = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title");
 
+    List list = new ArrayList();
+    NintendoSpecification nintendoSwitch;
+    
+    List<WebElement> listElements = driver.findElements(By.xpath("//div[@class='la3zd2uWXG']"));
+    for(WebElement e : listElements) {
+      List<WebElement> cells = e.findElements(By.tagName("dd"));
+      String type = cells.get(0).getText();
+      String screen = cells.get(2).getText();
+    }
+    System.out.println(list);
   }
-
-
-
-  //driver.get("https://yandex.ru/");
-  //driver.findElement(By.xpath("//input[@id='text']")).sendKeys("яндекс маркет");
-  //driver.findElement(By.xpath("//div[./button[@type='submit']]")).click();
-  //driver.findElement(By.xpath("//div[./b[@class='needsclick']]")).click();
-  //driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
-
-
-
 
   @AfterTest(alwaysRun = true)
   public void tearDown() throws Exception {
