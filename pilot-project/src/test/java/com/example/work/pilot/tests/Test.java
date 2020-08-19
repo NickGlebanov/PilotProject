@@ -32,17 +32,20 @@ public class Test {
     Thread.sleep(2000);
     String color = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title");
 
-    List list = new ArrayList();
-    List<WebElement> listElements = driver.findElements(By.xpath("//div[@class='la3zd2uWXG']"));
-    for(WebElement e : listElements) {
-      List<WebElement> cells = e.findElements(By.tagName("dd"));
-      String type = cells.get(0).getText();
-      String screen = cells.get(1).getText();
-      NintendoSpecification nt = new NintendoSpecification().withColor(color).withType(type).withScreen(screen);
+   // List list = new ArrayList();
+    //List<WebElement> listElements = driver.findElements(By.xpath("//div[@class='la3zd2uWXG']"));
+    //for(WebElement e : listElements) {
+    //  List<WebElement> cells = e.findElements(By.tagName("dd"));
+    //  String type = cells.get(0).getText();
+    //  String screen = cells.get(1).getText();
+    //  NintendoSpecification nt = new NintendoSpecification().withType(type).withScreen(screen);
+    //  list.add(nt);
+   // }
 
-      System.out.println(nt.getColor());
-      System.out.println(nt.getScreen());
-      System.out.println(nt.getType());
+    List list = new ArrayList();
+    List<WebElement> listElements = driver.findElements(By.tagName("dd"));
+    for(WebElement e : listElements) {
+      System.out.println(e.getText());
     }
 
   }
