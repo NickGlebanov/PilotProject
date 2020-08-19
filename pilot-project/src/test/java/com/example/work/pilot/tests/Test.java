@@ -33,15 +33,18 @@ public class Test {
     String color = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title");
 
     List list = new ArrayList();
-    NintendoSpecification nintendoSwitch;
-    
     List<WebElement> listElements = driver.findElements(By.xpath("//div[@class='la3zd2uWXG']"));
     for(WebElement e : listElements) {
       List<WebElement> cells = e.findElements(By.tagName("dd"));
       String type = cells.get(0).getText();
-      String screen = cells.get(2).getText();
+      String screen = cells.get(1).getText();
+      NintendoSpecification nt = new NintendoSpecification().withColor(color).withType(type).withScreen(screen);
+
+      System.out.println(nt.getColor());
+      System.out.println(nt.getScreen());
+      System.out.println(nt.getType());
     }
-    System.out.println(list);
+
   }
 
   @AfterTest(alwaysRun = true)
