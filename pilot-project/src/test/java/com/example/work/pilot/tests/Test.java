@@ -23,8 +23,8 @@ public class Test {
     driver.get("https://market.yandex.ru/");
     driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
     driver.findElement(By.xpath("//button[@class='_1XiEJDPVpk']")).click();
-    String oldTab = driver.getWindowHandle(); // сохраняем первую вкладку
-    driver.findElement(By.xpath("//h3[./a[@title='Игровая приставка Nintendo Switch']]")).click();
+    String oneTab = driver.getWindowHandle(); // сохраняем первую вкладку
+    driver.findElement(By.linkText("Игровая приставка Nintendo Switch")).click();
     ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles()); // список всех вкладок
     driver.switchTo().window(newTab.get(1)); // берем вторую вкладку
     //new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
@@ -42,12 +42,32 @@ public class Test {
     //  list.add(nt);
    // }
 
-    List list = new ArrayList();
+    List<WebElement> list = new ArrayList();
     List<WebElement> listElements = driver.findElements(By.tagName("dd"));
     for(WebElement e : listElements) {
-      System.out.println(e.getText());
+      list.add(e);
+      // Достуг того, что выгружены все характеристики, теперь надо добавить в модульный объект нужные
     }
+    NintendoSpecification nt = new NintendoSpecification().withType(list.get(1).getText()).withScreen(list.get(3).getText()).
+            withController(list.get(16).getText()).withAccessories(list.get(17).getText()).
+            withColor(color).withMemory(list.get(8).getText()).withWeight(list.get(15).getText());
 
+    System.out.println(nt.getColor());
+    System.out.println(nt.getType());
+    System.out.println(nt.getScreen());
+    System.out.println(nt.getController());
+    System.out.println(nt.getWeight());
+    System.out.println(nt.getAccessories());
+    System.out.println(nt.getMemory());
+
+
+    driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
+    driver.findElement(By.xpath("//button[@class='_1XiEJDPVpk']")).click();
+    //String twoTab = driver.getWindowHandle();
+    driver.findElement(By.linkText("Игровая приставка Nintendo Switch Lite")).click();
+    //ArrayList<String> newTab1 = new ArrayList<String>(driver.getWindowHandles());
+    //driver.switchTo().window(newTab1.get(1));
+    driver.findElement(By.linkText("Характеристики")).click(); 
   }
 
   @AfterTest(alwaysRun = true)

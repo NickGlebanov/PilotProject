@@ -1,12 +1,14 @@
 package com.example.work.pilot.classes;
 
+import org.openqa.selenium.WebElement;
+
 public class NintendoSpecification {
     String color;
     String type;
     String screen;
     String memory;
-    int capacity;
-    int weight;
+    String capacity;
+    String weight;
     String controller;
     String accessories;
 
@@ -46,20 +48,20 @@ public class NintendoSpecification {
         return this;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
 
-    public NintendoSpecification withCapacity(int capacity) {
+    public NintendoSpecification withCapacity(String capacity) {
         this.capacity = capacity;
         return this;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public NintendoSpecification withWeight(int weight) {
+    public NintendoSpecification withWeight(String weight) {
         this.weight = weight;
         return this;
     }
@@ -81,4 +83,5 @@ public class NintendoSpecification {
         this.accessories = accessories;
         return this;
     }
+
 }
