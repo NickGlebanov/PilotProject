@@ -21,15 +21,15 @@ public class Test {
 
   @org.testng.annotations.Test
   public void testS() throws Exception {
-    driver.get("https://market.yandex.ru/");
+    enterWebsite();
     driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
     driver.findElement(By.xpath("//button[@class='_1XiEJDPVpk']")).click();
     String oneTab = driver.getWindowHandle(); // сохраняем первую вкладку
-    driver.findElement(By.linkText("Игровая приставка Nintendo Switch")).click();
+    type(By.linkText("Игровая приставка Nintendo Switch"));
     ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles()); // список всех вкладок
     driver.switchTo().window(newTab.get(1)); // берем вторую вкладку
     //new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
-    driver.findElement(By.linkText("Характеристики")).click();
+    type(By.linkText("Характеристики"));
     String colorSwitch = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title");
 
 
@@ -43,13 +43,10 @@ public class Test {
             withColor(colorSwitch).withMemory(list.get(8).getText()).withWeight(list.get(15).getText());
 
 
-
-    driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
-    driver.findElement(By.xpath("//button[@class='_1XiEJDPVpk']")).click();
-    driver.findElement(By.linkText("Игровая приставка Nintendo Switch Lite")).click();
+    search();
     ArrayList<String> newTab1 = new ArrayList<String>(driver.getWindowHandles());
     driver.switchTo().window(newTab1.get(2));
-    driver.findElement(By.linkText("Характеристики")).click();
+    type(By.linkText("Характеристики"));
     String colorLite = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title"); // сделать потом Коллекцию цветов и выбирать один из них
 
     List<WebElement> list1 = new ArrayList();
@@ -66,6 +63,20 @@ public class Test {
     Assert.assertEquals(nt.getColor(), nt1.getColor());
     Assert.assertEquals(nt.getMemory(), nt1.getMemory());
     Assert.assertEquals(nt.getScreen(), nt1.getScreen());
+  }
+
+  public void type(By locator) {
+    driver.findElement(locator).click();
+  }
+
+  public void search() {
+    driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
+    driver.findElement(By.xpath("//button[@class='_1XiEJDPVpk']")).click();
+    type(By.linkText("Игровая приставка Nintendo Switch Lite"));
+  }
+
+  public void enterWebsite() {
+    driver.get("https://market.yandex.ru/");
   }
 
   @AfterTest(alwaysRun = true)
