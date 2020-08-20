@@ -32,21 +32,11 @@ public class Test {
     Thread.sleep(2000);
     String color = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title");
 
-   // List list = new ArrayList();
-    //List<WebElement> listElements = driver.findElements(By.xpath("//div[@class='la3zd2uWXG']"));
-    //for(WebElement e : listElements) {
-    //  List<WebElement> cells = e.findElements(By.tagName("dd"));
-    //  String type = cells.get(0).getText();
-    //  String screen = cells.get(1).getText();
-    //  NintendoSpecification nt = new NintendoSpecification().withType(type).withScreen(screen);
-    //  list.add(nt);
-   // }
 
     List<WebElement> list = new ArrayList();
     List<WebElement> listElements = driver.findElements(By.tagName("dd"));
     for(WebElement e : listElements) {
-      list.add(e);
-      // Достуг того, что выгружены все характеристики, теперь надо добавить в модульный объект нужные
+      list.add(e);   // Достуг того, что выгружены все характеристики, теперь надо добавить в модульный объект нужные
     }
     NintendoSpecification nt = new NintendoSpecification().withType(list.get(1).getText()).withScreen(list.get(3).getText()).
             withController(list.get(16).getText()).withAccessories(list.get(17).getText()).
@@ -63,10 +53,9 @@ public class Test {
 
     driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
     driver.findElement(By.xpath("//button[@class='_1XiEJDPVpk']")).click();
-    //String twoTab = driver.getWindowHandle();
     driver.findElement(By.linkText("Игровая приставка Nintendo Switch Lite")).click();
-    //ArrayList<String> newTab1 = new ArrayList<String>(driver.getWindowHandles());
-    //driver.switchTo().window(newTab1.get(1));
+    ArrayList<String> newTab1 = new ArrayList<String>(driver.getWindowHandles());
+    driver.switchTo().window(newTab1.get(2));
     driver.findElement(By.linkText("Характеристики")).click(); 
   }
 
