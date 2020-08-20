@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.example.work.pilot.classes.NintendoSpecification;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 
@@ -29,8 +30,7 @@ public class Test {
     driver.switchTo().window(newTab.get(1)); // берем вторую вкладку
     //new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
     driver.findElement(By.linkText("Характеристики")).click();
-    Thread.sleep(2000);
-    String color = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title");
+    String colorSwitch = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title");
 
 
     List<WebElement> list = new ArrayList();
@@ -40,15 +40,8 @@ public class Test {
     }
     NintendoSpecification nt = new NintendoSpecification().withType(list.get(1).getText()).withScreen(list.get(3).getText()).
             withController(list.get(16).getText()).withAccessories(list.get(17).getText()).
-            withColor(color).withMemory(list.get(8).getText()).withWeight(list.get(15).getText());
+            withColor(colorSwitch).withMemory(list.get(8).getText()).withWeight(list.get(15).getText());
 
-    System.out.println(nt.getColor());
-    System.out.println(nt.getType());
-    System.out.println(nt.getScreen());
-    System.out.println(nt.getController());
-    System.out.println(nt.getWeight());
-    System.out.println(nt.getAccessories());
-    System.out.println(nt.getMemory());
 
 
     driver.findElement(By.id("header-search")).sendKeys("nintendo switch");
@@ -56,7 +49,23 @@ public class Test {
     driver.findElement(By.linkText("Игровая приставка Nintendo Switch Lite")).click();
     ArrayList<String> newTab1 = new ArrayList<String>(driver.getWindowHandles());
     driver.switchTo().window(newTab1.get(2));
-    driver.findElement(By.linkText("Характеристики")).click(); 
+    driver.findElement(By.linkText("Характеристики")).click();
+    String colorLite = driver.findElement(By.xpath("//div[@class='_2PZFauqN3Y']")).getAttribute("title"); // сделать потом Коллекцию цветов и выбирать один из них
+
+    List<WebElement> list1 = new ArrayList();
+    List<WebElement> listElements1 = driver.findElements(By.tagName("dd"));
+    for(WebElement e : listElements1) {
+      list1.add(e);   // Достуг того, что выгружены все характеристики, теперь надо добавить в модульный объект нужные
+    }
+
+    NintendoSpecification nt1 = new NintendoSpecification().withType(list1.get(1).getText()).withScreen(list1.get(2).getText()).
+            withController(null).withAccessories(null).
+            withColor(colorLite).withMemory(list1.get(12).getText()).withWeight(list1.get(19).getText());
+
+    Assert.assertEquals(nt.getType(), nt1.getType());
+    Assert.assertEquals(nt.getColor(), nt1.getColor());
+    Assert.assertEquals(nt.getMemory(), nt1.getMemory());
+    Assert.assertEquals(nt.getScreen(), nt1.getScreen());
   }
 
   @AfterTest(alwaysRun = true)
