@@ -2,6 +2,8 @@ package com.example.work.pilot.manager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,9 +11,19 @@ public class ApplicationManager {
     public WebDriver driver;
     private SpecificationHelper specificationHelper;
     private SearchHelper searchHelper;
+    private String browser;
+
+    public ApplicationManager(String browser) {
+
+        this.browser = browser;
+    }
 
     public void start() {
-        driver = new ChromeDriver();
+        if(browser == BrowserType.CHROME){
+            driver = new ChromeDriver();
+        } else {
+            driver = new FirefoxDriver();
+        }
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         searchHelper = new SearchHelper(driver);
         specificationHelper = new SpecificationHelper(driver);
