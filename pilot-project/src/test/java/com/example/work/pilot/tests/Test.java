@@ -2,6 +2,7 @@ package com.example.work.pilot.tests;
 
 import com.example.work.pilot.classes.NintendoSpecification;
 import com.example.work.pilot.manager.TestBase;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -23,11 +24,7 @@ public class Test extends TestBase {
     String colorSwitch = app.getColor(By.xpath("//div[@class='_2PZFauqN3Y']"), "title");
 
 
-    List<WebElement> list = new ArrayList();
-    List<WebElement> listElements = app.driver.findElements(By.tagName("dd"));
-    for(WebElement e : listElements) {
-      list.add(e);   // Достуг того, что выгружены все характеристики, теперь надо добавить в модульный объект нужные
-    }
+    List<WebElement> list = app.getWebElements();
 
     NintendoSpecification nt = new NintendoSpecification().withType(list.get(1).getText()).withScreen(list.get(3).getText()).
             withController(list.get(16).getText()).withAccessories(list.get(17).getText()).
@@ -35,25 +32,24 @@ public class Test extends TestBase {
 
 
     app.search(By.id("header-search"),By.xpath("//button[@class='_1XiEJDPVpk']"), "nintendo switch");
+    Thread.sleep(10000);
     app.type(By.linkText("Игровая приставка Nintendo Switch Lite"));
+    Thread.sleep(10000);
     app.getWindow(2);
     app.type(By.linkText("Характеристики"));
     String colorLite = app.getColor(By.xpath("//div[@class='_2PZFauqN3Y']"), "title"); // сделать потом Коллекцию цветов и выбирать один из них
 
-    List<WebElement> list1 = new ArrayList();
-    List<WebElement> listElements1 = app.driver.findElements(By.tagName("dd"));
-    for(WebElement e : listElements1) {
-      list1.add(e);   // Достуг того, что выгружены все характеристики, теперь надо добавить в модульный объект нужные
-    }
+    List<WebElement> list1 = app.getWebElements();
 
     NintendoSpecification nt1 = new NintendoSpecification().withType(list1.get(1).getText()).withScreen(list1.get(2).getText()).
             withController(null).withAccessories(null).
             withColor(colorLite).withMemory(list1.get(12).getText()).withWeight(list1.get(19).getText());
 
-    Assert.assertEquals(nt.getType(), nt1.getType());
-    Assert.assertEquals(nt.getColor(), nt1.getColor());
-    Assert.assertEquals(nt.getMemory(), nt1.getMemory());
-    Assert.assertEquals(nt.getScreen(), nt1.getScreen());
+    Assert.assertEquals(nt.getType(), nt1.getType()); // проверка совпадения типов
+    Assert.assertEquals(nt.getColor(), nt1.getColor()); // проверка совпадения цветов
+    Assert.assertEquals(nt.getMemory(), nt1.getMemory()); // проверка совпадения наличия слотов карты памяти
+    Assert.assertEquals(nt.getScreen(), nt1.getScreen()); // проверка совпадения размера экранов
   }
+
 
 }

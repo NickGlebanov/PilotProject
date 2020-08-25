@@ -1,12 +1,11 @@
 package com.example.work.pilot.manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
@@ -37,6 +36,16 @@ public class ApplicationManager {
 
     public void enterWebsite() {
       driver.get("https://market.yandex.ru/");
+    }
+
+    @NotNull
+    public List<WebElement> getWebElements() {
+        List<WebElement> list = new ArrayList();
+        List<WebElement> listElements = driver.findElements(By.tagName("dd"));
+        for (WebElement e : listElements) {
+            list.add(e);   // Достуг того, что выгружены все характеристики, теперь надо добавить в модульный объект нужные
+        }
+        return list;
     }
 
     public void stop() {
