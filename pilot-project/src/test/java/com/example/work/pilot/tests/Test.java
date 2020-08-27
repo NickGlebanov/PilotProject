@@ -19,7 +19,7 @@ public class Test extends TestBase {
     app.getSpecificationHelper().getWindow(1);
     //new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
     app.getSearchHelper().pick();
-    String colorSwitch = app.getSpecificationHelper().getColor(By.xpath("//div[@class='_2PZFauqN3Y']"), "title");
+    String colorSwitch = app.getSpecificationHelper().getColor();
 
 
     List<WebElement> list = app.getSpecificationHelper().getWebElements();
@@ -35,7 +35,7 @@ public class Test extends TestBase {
     Thread.sleep(10000);
     app.getSpecificationHelper().getWindow(2);
     app.getSearchHelper().pick();
-    String colorLite = app.getSpecificationHelper().getColor(By.xpath("//div[@class='_2PZFauqN3Y']"), "title"); // сделать потом Коллекцию цветов и выбирать один из них
+    String colorLite = app.getSpecificationHelper().getColor(); // сделать потом Коллекцию цветов и выбирать один из них
 
     List<WebElement> list1 = app.getSpecificationHelper().getWebElements();
 
