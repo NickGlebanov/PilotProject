@@ -13,12 +13,12 @@ public class Test extends TestBase {
   @org.testng.annotations.Test
   public void testS() throws Exception {
     app.enterWebsite();
-    app.getSearchHelper().search(By.id("header-search"), By.xpath("//button[@class='_1XiEJDPVpk']"), "nintendo switch");
-    app.getSearchHelper().type(By.linkText("Игровая приставка Nintendo Switch"));
+    app.getSearchHelper().searchProduct();
+    app.getSearchHelper().ntStandart();
     String oneTab = app.getSearchHelper().driver.getWindowHandle(); // сохраняем первую вкладку
     app.getSpecificationHelper().getWindow(1);
     //new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
-    app.getSearchHelper().type(By.linkText("Характеристики"));
+    app.getSearchHelper().pick();
     String colorSwitch = app.getSpecificationHelper().getColor(By.xpath("//div[@class='_2PZFauqN3Y']"), "title");
 
 
@@ -29,12 +29,12 @@ public class Test extends TestBase {
             withColor(colorSwitch).withMemory(list.get(8).getText()).withWeight(list.get(15).getText());
 
 
-    app.getSearchHelper().search(By.id("header-search"),By.xpath("//button[@class='_1XiEJDPVpk']"), "nintendo switch");
+    app.getSearchHelper().searchProduct();
     Thread.sleep(10000);
-    app.getSearchHelper().type(By.linkText("Игровая приставка Nintendo Switch Lite"));
+    app.getSearchHelper().ntLite();
     Thread.sleep(10000);
     app.getSpecificationHelper().getWindow(2);
-    app.getSearchHelper().type(By.linkText("Характеристики"));
+    app.getSearchHelper().pick();
     String colorLite = app.getSpecificationHelper().getColor(By.xpath("//div[@class='_2PZFauqN3Y']"), "title"); // сделать потом Коллекцию цветов и выбирать один из них
 
     List<WebElement> list1 = app.getSpecificationHelper().getWebElements();
