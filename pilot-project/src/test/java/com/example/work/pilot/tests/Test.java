@@ -14,19 +14,19 @@ public class Test extends TestBase {
   public void testS() throws Exception {
     app.enterWebsite();
     app.getSearchHelper().searchProduct("nintendo switch");
-    app.getSearchHelper().clickProduct(By.linkText("Игровая приставка Nintendo Switch"));
+    app.getSearchHelper().clickProduct("Игровая приставка Nintendo Switch");
     String oneTab = app.getSearchHelper().saveOldTab(); // сохраняем первую вкладку
     app.getSpecificationHelper().getWindow(1);
-    app.getSearchHelper().getCharacteristic();
+    app.getSearchHelper().clickCharacteristic();
     List<WebElement> list = app.getSpecificationHelper().getListPoints();
 
     NintendoSpecification nt = app.getSpecificationHelper().getNintendo(list.get(1).getText(), list.get(3).getText(), list.get(16).getText(),
             list.get(17).getText(), app.getSpecificationHelper().getColor(), list.get(8).getText(), list.get(15).getText());
 
     app.getSearchHelper().searchProduct("nintendo switch");
-    app.getSearchHelper().clickProduct(By.linkText("Игровая приставка Nintendo Switch Lite"));
+    app.getSearchHelper().clickProduct("Игровая приставка Nintendo Switch Lite");
     app.getSpecificationHelper().getWindow(2);
-    app.getSearchHelper().getCharacteristic();
+    app.getSearchHelper().clickCharacteristic();
     List<WebElement> list1 = app.getSpecificationHelper().getListPoints();
 
     NintendoSpecification nt1 = app.getSpecificationHelper().getNintendo(list1.get(1).getText(), list1.get(2).getText(),

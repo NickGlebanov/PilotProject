@@ -12,13 +12,13 @@ public class HelperBase {
         this.driver = driver;
     }
 
-    public void toPush(By locator) {
+    public void click(By locator) {
         driver.findElement(locator).click();
     }
 
     public void type(By locator, By locator1, String attributeName) {
         driver.findElement(locator).sendKeys(attributeName);
-        toPush(locator1);
+        click(locator1);
     }
 
     public String getAttribute(By locator, String text) {

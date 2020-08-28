@@ -8,16 +8,16 @@ public class SearchHelper extends HelperBase{
         super(driver);
     }
 
-    public void clickProduct(By locator) {
-        toPush(locator);
+    public void clickProduct(String text) {
+        click(By.linkText(text));
     }
 
     public void searchProduct(String attributeName) {
         type(By.id("header-search"), By.xpath("//div[text()='Найти']/.."), attributeName);
     }
 
-    public void getCharacteristic() {
-        toPush(By.linkText("Характеристики"));
+    public void clickCharacteristic() {
+        click(By.linkText("Характеристики"));
     }
 
     public String saveOldTab(){
