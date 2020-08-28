@@ -18,30 +18,27 @@ public class Test extends TestBase {
     String oneTab = app.getSearchHelper().saveOldTab(); // сохраняем первую вкладку
     app.getSpecificationHelper().getWindow(1);
     app.getSearchHelper().getCharacteristic();
-    List<WebElement> set = app.getSpecificationHelper().getSetColor();
+    //List<WebElement> set = app.getSpecificationHelper().getListColor();
 
     String colorSwitch = app.getSpecificationHelper().getColor();
 
     List<WebElement> list = app.getSpecificationHelper().getListPoints();
 
-    NintendoSpecification nt = new NintendoSpecification().withType(list.get(1).getText()).withScreen(list.get(3).getText()).
-            withController(list.get(16).getText()).withAccessories(list.get(17).getText()).
-            withColor(colorSwitch).withMemory(list.get(8).getText()).withWeight(list.get(15).getText());
+    NintendoSpecification nt = app.getSpecificationHelper().getNintendo(list.get(1).getText(), list.get(3).getText(), list.get(16).getText(),
+            list.get(17).getText(), colorSwitch, list.get(8).getText(), list.get(15).getText());
 
     app.getSearchHelper().searchProduct("nintendo switch");
-    Thread.sleep(10000);
+
     app.getSearchHelper().clickProduct(By.linkText("Игровая приставка Nintendo Switch Lite"));
-    Thread.sleep(10000);
+
     app.getSpecificationHelper().getWindow(2);
     app.getSearchHelper().getCharacteristic();
     String colorLite = app.getSpecificationHelper().getColor(); // сделать потом Коллекцию цветов и выбирать один из них
 
     List<WebElement> list1 = app.getSpecificationHelper().getListPoints();
 
-
-    NintendoSpecification nt1 = new NintendoSpecification().withType(list1.get(1).getText()).withScreen(list1.get(2).getText()).
-            withController(null).withAccessories(null).
-            withColor(colorLite).withMemory(list1.get(12).getText()).withWeight(list1.get(19).getText());
+    NintendoSpecification nt1 = app.getSpecificationHelper().getNintendo(list1.get(1).getText(), list1.get(2).getText(),
+            null, null, colorLite, list1.get(12).getText(), list1.get(19).getText());
 
     Assert.assertEquals(nt.getType(), nt1.getType()); // проверка совпадения типов
     Assert.assertEquals(nt.getColor(), nt1.getColor()); // проверка совпадения цветов

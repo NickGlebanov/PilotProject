@@ -21,6 +21,10 @@ public class HelperBase {
         toPush(locator1);
     }
 
+    public String getAttribute(By locator, String text) {
+        return driver.findElement(locator).getAttribute(text);
+    }
+
     private boolean isElementPresent(By by) {
         try {
             driver.findElement(by);
@@ -39,7 +43,4 @@ public class HelperBase {
         }
     }
 
-    public String getAttribute(By locator, String text) {
-        return driver.findElement(locator).getAttribute(text);
-    }
 }

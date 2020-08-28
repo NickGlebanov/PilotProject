@@ -26,7 +26,7 @@ public class ApplicationManager {
         }
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         searchHelper = new SearchHelper(driver);
-        specificationHelper = new SpecificationHelper(driver);
+        specificationHelper = new SpecificationHelper(driver, this);
     }
 
     public void enterWebsite() {

@@ -39,13 +39,20 @@ public class SpecificationHelper extends HelperBase{
         return list;
     }
 
-    public List<WebElement> getSetColor() {
+    public List<WebElement> getListColor() {
         List<WebElement> list = new ArrayList<>();
         List<WebElement> listElements = driver.findElements(By.xpath("//div[@class='_2PZFauqN3Y']"));
         for (WebElement e : listElements) {
             list.add(e);   // коллекция всех цветов
         }
         return list;
+    }
+
+    public NintendoSpecification getNintendo(String type, String screen, String controller, String accessories, String color, String memory, String weight) {
+        NintendoSpecification nt1 = new NintendoSpecification().withType(type).withScreen(screen).
+                withController(controller).withAccessories(accessories).
+                withColor(color).withMemory(memory).withWeight(weight);
+    return nt1;
     }
 
 }

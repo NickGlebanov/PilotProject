@@ -13,7 +13,7 @@ public class SearchHelper extends HelperBase{
     }
 
     public void searchProduct(String attributeName) {
-        type(By.id("header-search"), By.xpath("//button[@class='_1XiEJDPVpk']"), attributeName);
+        type(By.id("header-search"), By.xpath("//div[text()='Найти']/.."), attributeName);
     }
 
     public void getCharacteristic() {
