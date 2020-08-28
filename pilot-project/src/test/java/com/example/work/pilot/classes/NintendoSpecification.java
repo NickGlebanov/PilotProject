@@ -1,6 +1,5 @@
 package com.example.work.pilot.classes;
 
-import org.openqa.selenium.WebElement;
 
 public class NintendoSpecification {
     String color;
