@@ -1,19 +1,23 @@
 package com.example.work.pilot.manager;
 
+import com.example.work.pilot.classes.NintendoSpecification;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class SpecificationHelper{
+public class SpecificationHelper extends HelperBase{
 
-    public WebDriver driver;
+    ApplicationManager ap;
 
-    public SpecificationHelper(WebDriver driver) {
-        this.driver = driver;
+    public SpecificationHelper(WebDriver driver, ApplicationManager ap) {
+        super(driver);
+        this.ap = ap;
     }
 
     public String getColor() {
@@ -26,16 +30,22 @@ public class SpecificationHelper{
     }
 
     @NotNull
-    public List<WebElement> getWebElements() {
+    public List<WebElement> getListPoints() {
         List<WebElement> list = new ArrayList();
         List<WebElement> listElements = driver.findElements(By.tagName("dd"));
         for (WebElement e : listElements) {
-            list.add(e);   // Достуг того, что выгружены все характеристики, теперь надо добавить в модульный объект нужные
+            list.add(e);   // Выгружены все характеристики, теперь надо добавить в модульный объект нужные
         }
         return list;
     }
 
-    public String getAttribute(By locator, String text) {
-        return driver.findElement(locator).getAttribute(text);
+    public List<WebElement> getSetColor() {
+        List<WebElement> list = new ArrayList<>();
+        List<WebElement> listElements = driver.findElements(By.xpath("//div[@class='_2PZFauqN3Y']"));
+        for (WebElement e : listElements) {
+            list.add(e);   // коллекция всех цветов
+        }
+        return list;
     }
+
 }

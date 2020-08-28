@@ -1,9 +1,6 @@
 package com.example.work.pilot.manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 public class SearchHelper extends HelperBase{
 
@@ -11,34 +8,20 @@ public class SearchHelper extends HelperBase{
         super(driver);
     }
 
-    public void ntStandart() {
-        type(By.linkText("Игровая приставка Nintendo Switch"));
+    public void clickProduct(By locator) {
+        toPush(locator);
     }
 
-    public void ntLite() {
-        type(By.linkText("Игровая приставка Nintendo Switch Lite"));
+    public void searchProduct(String attributeName) {
+        type(By.id("header-search"), By.xpath("//button[@class='_1XiEJDPVpk']"), attributeName);
     }
 
-    public void searchProduct() {
-        search(By.id("header-search"), By.xpath("//button[@class='_1XiEJDPVpk']"), "nintendo switch");
+    public void getCharacteristic() {
+        toPush(By.linkText("Характеристики"));
     }
 
-
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+    public String saveOldTab(){
+        return driver.getWindowHandle();
     }
 
-    private boolean isAlertPresent() {
-        try {
-            driver.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
 }

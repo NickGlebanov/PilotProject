@@ -1,26 +1,42 @@
 package com.example.work.pilot.manager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class HelperBase {
-    public WebDriver driver;
+    protected WebDriver driver;
 
     public HelperBase(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void pick() {
-        type(By.linkText("Характеристики"));
-    }
-
-    public void type(By locator) {
+    public void toPush(By locator) {
         driver.findElement(locator).click();
     }
 
-    public void search(By locator, By locator1, String text) {
-        driver.findElement(locator).sendKeys(text);
-        type(locator1);
+    public void type(By locator, By locator1, String attributeName) {
+        driver.findElement(locator).sendKeys(attributeName);
+        toPush(locator1);
+    }
+
+    private boolean isElementPresent(By by) {
+        try {
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    private boolean isAlertPresent() {
+        try {
+            driver.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
     }
 
     public String getAttribute(By locator, String text) {

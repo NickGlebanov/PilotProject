@@ -13,31 +13,31 @@ public class Test extends TestBase {
   @org.testng.annotations.Test
   public void testS() throws Exception {
     app.enterWebsite();
-    app.getSearchHelper().searchProduct();
-    app.getSearchHelper().ntStandart();
-    String oneTab = app.getSearchHelper().driver.getWindowHandle(); // сохраняем первую вкладку
+    app.getSearchHelper().searchProduct("nintendo switch");
+    app.getSearchHelper().clickProduct(By.linkText("Игровая приставка Nintendo Switch"));
+    String oneTab = app.getSearchHelper().saveOldTab(); // сохраняем первую вкладку
     app.getSpecificationHelper().getWindow(1);
-    //new Select(driver.findElement(By.id("dropdown-control-1597759688456"))).selectByVisibleText("нет");
-    app.getSearchHelper().pick();
+    app.getSearchHelper().getCharacteristic();
+    List<WebElement> set = app.getSpecificationHelper().getSetColor();
+
     String colorSwitch = app.getSpecificationHelper().getColor();
 
-
-    List<WebElement> list = app.getSpecificationHelper().getWebElements();
+    List<WebElement> list = app.getSpecificationHelper().getListPoints();
 
     NintendoSpecification nt = new NintendoSpecification().withType(list.get(1).getText()).withScreen(list.get(3).getText()).
             withController(list.get(16).getText()).withAccessories(list.get(17).getText()).
             withColor(colorSwitch).withMemory(list.get(8).getText()).withWeight(list.get(15).getText());
 
-
-    app.getSearchHelper().searchProduct();
+    app.getSearchHelper().searchProduct("nintendo switch");
     Thread.sleep(10000);
-    app.getSearchHelper().ntLite();
+    app.getSearchHelper().clickProduct(By.linkText("Игровая приставка Nintendo Switch Lite"));
     Thread.sleep(10000);
     app.getSpecificationHelper().getWindow(2);
-    app.getSearchHelper().pick();
+    app.getSearchHelper().getCharacteristic();
     String colorLite = app.getSpecificationHelper().getColor(); // сделать потом Коллекцию цветов и выбирать один из них
 
-    List<WebElement> list1 = app.getSpecificationHelper().getWebElements();
+    List<WebElement> list1 = app.getSpecificationHelper().getListPoints();
+
 
     NintendoSpecification nt1 = new NintendoSpecification().withType(list1.get(1).getText()).withScreen(list1.get(2).getText()).
             withController(null).withAccessories(null).
