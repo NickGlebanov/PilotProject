@@ -2,14 +2,14 @@ package com.example.work.pilot.classes;
 
 
 public class NintendoSpecification {
-    String color;
-    String type;
-    String screen;
-    String memory;
-    String capacity;
-    String weight;
-    String controller;
-    String accessories;
+    private String color;
+    private String type;
+    private String screen;
+    private String memory;
+    private String capacity;
+    private String weight;
+    private String controller;
+    private String accessories;
 
     public String getColor() {
         return color;
